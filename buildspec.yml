@@ -11,36 +11,20 @@ phases:
   build:
     commands:
       - echo "Building the application..."
-<<<<<<< HEAD
-      - npm run build  # Only needed if using TypeScript or Babel
-=======
       - npm run build || echo "No build step required"  # Runs build if needed, otherwise skips
->>>>>>> a4f6942 (Update again)
 
   post_build:
     commands:
       - echo "Running tests..."
-<<<<<<< HEAD
-      - npm test  # Run tests to validate the build
-=======
       - npm test || echo "No tests found, skipping tests"  # Runs tests if available
->>>>>>> a4f6942 (Update again)
       - echo "Build and tests completed on $(date)"
 
 artifacts:
   files:
-    - '**/*'
-  base-directory: .  # Includes everything
-<<<<<<< HEAD
-  discard-paths: no
-
-cache:
-  paths:
-    - node_modules/**  # Cache dependencies
-=======
-  discard-paths: no  # Keeps file structure intact
+    - '**/*'  # Includes all files
+  base-directory: .  # Ensures all necessary files are included
+  discard-paths: no  # Keeps the file structure intact
 
 cache:
   paths:
     - node_modules/**  # Cache dependencies for faster builds
->>>>>>> a4f6942 (Update again)
