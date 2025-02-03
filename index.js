@@ -12,7 +12,7 @@ const registerPath = "/register";
 const loginPath = "/login";
 const verifyPath = "/verify";
 
-// ✅ AWS Lambda Handler
+// ✅ AWS Lambda Handler (nice to have)
 const handler = async (event) => {
   console.log("Request Event: " + JSON.stringify(event));
   let response;

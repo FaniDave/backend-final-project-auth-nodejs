@@ -1,0 +1,19 @@
+# Ignore node_modules
+node_modules/
+npm-debug.log
+yarn-error.log
+.DS_Store
+.env
+*.env
+config.js
+config.json
+secrets.json
+database.json
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+credentials/
+.idea/
+.vscode/
