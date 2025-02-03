@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18  # Specify Node.js version explicitly
+    commands:
+      - echo "Installing dependencies..."
+      - npm install
+  build:
+    commands:
+      - echo "Building the application..."
+      - npm run build  # If your backend has a build step (optional)
+  post_build:
+    commands:
+      - echo "Running tests..."
+      - npm test  # Run tests to validate the build
+      - echo "Build and tests completed on $(date)"
+artifacts:
+  files:
+    - '**/*'
+  base-directory: .  # Includes everything in the project directory
+  discard-paths: no  # Keeps file structure intact
+cache:
+  paths:
+    - node_modules/**  # Cache dependencies for faster builds
