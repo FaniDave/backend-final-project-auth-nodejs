@@ -5,7 +5,7 @@ const auth = require("../utils/auth");
 
 AWS.config.update({ region: "us-east-1" });
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const userTable = "AuthUserTable"; // ✅ UPDATED TABLE NAME
+const userTable = "AuthUserTable";
 
 async function login(user) {
   const { email, password } = user;
@@ -25,7 +25,12 @@ async function login(user) {
     return util.buildResponse(403, { message: "Incorrect password" });
   }
 
-  const userInfo = { email: existingUser.email, name: existingUser.userName };
+  const userInfo = {
+    email: existingUser.email,
+    name: existingUser.userName,
+    imageUrl: existingUser.imageUrl, // ✅ Include image URL
+  };
+
   const token = auth.generateToken(userInfo);
 
   return util.buildResponse(200, { user: userInfo, token });

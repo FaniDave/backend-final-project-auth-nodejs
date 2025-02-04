@@ -6,13 +6,14 @@ AWS.config.update({ region: "us-east-1" });
 const registerService = require("./services/register");
 const loginService = require("./services/login");
 const verifyService = require("./services/verify");
+const updateProfileService = require("./services/updateProfile");
 
 const healthPath = "/health";
 const registerPath = "/register";
 const loginPath = "/login";
 const verifyPath = "/verify";
+const updateProfilePath = "/updateProfilePath";
 
-// ✅ AWS Lambda Handler (nice to have)
 const handler = async (event) => {
   console.log("Request Event: " + JSON.stringify(event));
   let response;
@@ -26,6 +27,13 @@ const handler = async (event) => {
       response = await loginService.login(JSON.parse(event.body));
     } else if (event.httpMethod === "POST" && event.path === verifyPath) {
       response = verifyService.verify(JSON.parse(event.body));
+    } else if (
+      event.httpMethod === "PUT" &&
+      event.path === updateProfilePath
+    ) {
+      response = await updateProfileService.updateProfilePicture(
+        JSON.parse(event.body)
+      );
     } else {
       response = util.buildResponse(404, { error: "Not Found" });
     }
@@ -34,5 +42,4 @@ const handler = async (event) => {
   return response;
 };
 
-// ✅ CommonJS Export for AWS Lambda
 module.exports = { handler };
